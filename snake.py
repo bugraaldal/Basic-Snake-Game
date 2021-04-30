@@ -6,6 +6,16 @@ import pygame as pg
 
 #t0 = time.process_time()
 
+# Creating a path and a text file to keep track of the best score 
+cur_path = os.getcwd()
+if not(os.path.isdir(f"{cur_path}/snake_game/")):
+    os.mkdir(f"{cur_path}/snake_game/")
+    os.chdir(f"{cur_path}/snake_game/")
+    f = open(f"{os.getcwd()}/Best.txt", "w+").close()
+    a = open(f"{os.getcwd()}/Best.txt", "r+")
+    a.write("0")
+    a.close()
+
 
 class points:
     def __init__(self):
@@ -107,12 +117,12 @@ class main:
 
     def scoreShow(self):
         # Opens a file, reads it and shows it on the screen
-        f = open("/home/buura/Desktop/Python/Games/HighestScore.txt", "r+")
+        f = open(f"{os.getcwd()}/Best.txt", "r+")
         Stimes = int(f.read())
         snaketall = len(self._snake.snake) - 3
         if snaketall > Stimes:
             f.close()
-            k = open("/home/buura/Desktop/Python/Games/HighestScore.txt", "w")
+            k = open(f"{os.getcwd()}/Best.txt", "w")
             k.write(str(snaketall))
             k.close()
             snaketall = Stimes
